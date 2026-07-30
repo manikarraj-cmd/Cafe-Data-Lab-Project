@@ -3,7 +3,8 @@
 An end-to-end Data Science, Data Engineering, and Machine Learning project that transforms raw restaurant orders into an interactive analytics dashboard and a predictive AI model.
 
 📸 Dashboard Preview
-<img width="1920" height="1080" alt="Screenshot 2026-07-30 175330" src="https://github.com/user-attachments/assets/890fce43-045a-4228-8fdd-5bf3ee8a7e15" />
+<img width="1828" height="864" alt="Screenshot 2026-07-30 175330" src="https://github.com/user-attachments/assets/2fb44f50-cf5f-41e5-92bd-311f9f8e0a14" />
+
 
 
 (Hey! When you are on GitHub, edit this file and literally drag-and-drop a screenshot of your beautiful Streamlit app right here! Delete this text once you do.)
