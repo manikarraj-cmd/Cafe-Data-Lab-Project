@@ -3,7 +3,8 @@
 An end-to-end Data Science, Data Engineering, and Machine Learning project that transforms raw restaurant orders into an interactive analytics dashboard and a predictive AI model.
 
 📸 Dashboard Preview
-<img width="1917" height="907" alt="Screenshot 2026-07-30 180117" src="https://github.com/user-attachments/assets/ae8d0cc2-c208-40ee-8261-a63ae390ae60" />
+<img width="1823" height="857" alt="Screenshot 2026-07-30 180117" src="https://github.com/user-attachments/assets/5f87657e-9ad4-41e1-be0f-817b149bd8f2" />
+
 
 
 
