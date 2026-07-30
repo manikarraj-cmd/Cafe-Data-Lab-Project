@@ -26,6 +26,21 @@ st.markdown("""
 def load_data():
     current_directory = os.path.dirname(os.path.abspath(__file__))
     db_file_path = os.path.join(current_directory, 'cafe_data.db')
+    csv_file_path = os.path.join(current_directory, 'restaurant_orders.csv')
+    
+    # --- CLOUD DEPLOYMENT FIX ---
+    # If the database doesn't exist (because GitHub ignored it), build it now!
+    if not os.path.exists(db_file_path):
+        try:
+            raw_df = pd.read_csv(csv_file_path)
+            setup_conn = sqlite3.connect(db_file_path)
+            raw_df.to_sql('orders', setup_conn, if_exists='replace', index=False)
+            setup_conn.close()
+        except Exception as e:
+            st.error(f"Could not build database on the cloud: {e}")
+            return None
+    # ----------------------------
+
     try:
         conn = sqlite3.connect(db_file_path)
         df = pd.read_sql("SELECT * FROM orders;", conn)
@@ -77,7 +92,7 @@ if df is not None:
 
         if not filtered_df.empty:
             # ROW 1: Timeline Scatter Plot & Donut Chart
-            row1_col1, row1_col2 = st.columns([2, 1]) # Make the scatter plot wider
+            row1_col1, row1_col2 = st.columns([2, 1]) 
             
             with row1_col1:
                 st.subheader("Daily Order Volume (Time Series)")
@@ -86,7 +101,7 @@ if df is not None:
                 # Create an awesome interactive Scatter/Line plot
                 fig_scatter = px.line(time_data, x='Date', y='Orders', markers=True, 
                                       title="Orders over Time", 
-                                      line_shape="spline", # Curved lines!
+                                      line_shape="spline",
                                       color_discrete_sequence=['#ff7f0e'])
                 fig_scatter.update_traces(marker=dict(size=10, opacity=0.8, line=dict(width=2, color='DarkSlateGrey')))
                 st.plotly_chart(fig_scatter, use_container_width=True)
