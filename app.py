@@ -10,14 +10,12 @@ st.set_page_config(page_title="Cafe Pro Dashboard", page_icon="☕", layout="wid
 @st.cache_data
 def load_data():
     csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'restaurant_orders.csv')
-    df = pd.read_csv(csv_file_path)
     
-    # 1. This removes any accidental spaces from the column names (e.g., "Order Amount " -> "Order Amount")
-    df.columns = df.columns.str.strip()
+    # We tell pandas that the first row is NOT a header
+    column_names = ['Order ID', 'Date', 'Product', 'Order Amount', 'Total_Unknown', 'Payment Method', 'Customer Name', 'City']
+    df = pd.read_csv(csv_file_path, names=column_names, header=None)
     
-    # 2. This prints the actual names to the console so we can see them
-    print("Columns found in CSV:", df.columns.tolist())
-    
+    # Now that we have named them, we can proceed with your existing code
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
     df['Payment Method'] = df['Payment Method'].str.strip()
     df = df.dropna()
