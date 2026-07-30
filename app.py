@@ -9,21 +9,19 @@ st.set_page_config(page_title="Cafe Pro Dashboard", page_icon="☕", layout="wid
 # --- LOAD DATA (Direct CSV Load - Cloud Optimized) ---
 @st.cache_data
 def load_data():
-    # Use the absolute path to ensure it finds the file in the same folder
     csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'restaurant_orders.csv')
+    df = pd.read_csv(csv_file_path)
     
-    try:
-        # Load directly from CSV to avoid SQLite database permissions issues
-        df = pd.read_csv(csv_file_path)
-        
-        # Clean Data
-        df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
-        df['Payment Method'] = df['Payment Method'].str.strip()
-        df = df.dropna()
-        return df
-    except Exception as e:
-        st.error(f"Error loading CSV data: {e}")
-        return None
+    # 1. This removes any accidental spaces from the column names (e.g., "Order Amount " -> "Order Amount")
+    df.columns = df.columns.str.strip()
+    
+    # 2. This prints the actual names to the console so we can see them
+    print("Columns found in CSV:", df.columns.tolist())
+    
+    df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
+    df['Payment Method'] = df['Payment Method'].str.strip()
+    df = df.dropna()
+    return df
 
 df = load_data()
 
