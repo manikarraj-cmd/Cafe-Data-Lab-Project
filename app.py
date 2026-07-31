@@ -42,18 +42,19 @@ st.markdown("""
         transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .metric-card:hover {
-        border-color: #58a6ff;
+        border-color: #30363d;
         transform: translateY(-2px);
     }
     
-    /* Top Header Banner */
+    /* Executive Dark Top Banner (Blue Paint Removed) */
     .header-box {
-        background: linear-gradient(90deg, #1f6feb 0%, #388bfd 100%);
+        background-color: #161b22;
+        border: 1px solid #30363d;
         border-radius: 12px;
         padding: 24px 30px;
         margin-bottom: 25px;
-        color: #ffffff;
-        box-shadow: 0 10px 20px rgba(31, 111, 235, 0.2);
+        color: #f0f6fc;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     
     /* Metric Typography */
@@ -86,9 +87,9 @@ st.markdown("""
         padding: 10px 20px;
     }
     .stTabs [aria-selected="true"] {
-        background-color: #1f6feb !important;
-        color: #ffffff !important;
-        border-color: #58a6ff !important;
+        background-color: #21262d !important;
+        color: #f0f6fc !important;
+        border-color: #8b949e !important;
     }
     
     /* Custom Buttons */
@@ -155,11 +156,11 @@ def train_revenue_model(data):
 
 model, feature_columns, model_r2 = train_revenue_model(df)
 
-# --- HEADER HERO BANNER ---
+# --- CLEAN HEADER BANNER (NO BLUE PAINT) ---
 st.markdown("""
     <div class="header-box">
-        <h1 style="margin: 0; font-size: 2.2rem; font-weight: 800; color: white;">☕ Cafe Data Lab — Executive Command Center</h1>
-        <p style="margin: 5px 0 0 0; font-size: 1.05rem; opacity: 0.9;">Real-time Business Intelligence, Multi-Branch Analytics & AI Revenue Forecasting</p>
+        <h1 style="margin: 0; font-size: 2.2rem; font-weight: 800; color: #f0f6fc;">☕ Cafe Data Lab — Executive Command Center</h1>
+        <p style="margin: 5px 0 0 0; font-size: 1.05rem; color: #8b949e;">Real-time Business Intelligence, Multi-Branch Analytics & AI Revenue Forecasting</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -288,7 +289,7 @@ with tab1:
                 names="Type",
                 values="Count",
                 hole=0.45,
-                color_discrete_sequence=["#f78166", "#58a6ff"],
+                color_discrete_sequence=["#f78166", "#3fb950"],
                 template="plotly_dark"
             )
             fig_type.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350)
@@ -335,7 +336,7 @@ with tab2:
                 <div style="background: #161b22; border: 2px solid #238636; border-radius: 12px; padding: 25px; text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 1rem; color: #8b949e; text-transform: uppercase; font-weight: 700;">Forecasted Order Value</div>
                     <div style="font-size: 3rem; color: #3fb950; font-weight: 800; margin: 10px 0;">${prediction:,.2f}</div>
-                    <div style="font-size: 0.9rem; color: #8b949e;">⚡ AI Model Confidence ($R^2$ Score): <strong style="color: #58a6ff;">{model_r2:.2f}</strong></div>
+                    <div style="font-size: 0.9rem; color: #8b949e;">⚡ AI Model Confidence ($R^2$ Score): <strong style="color: #f0f6fc;">{model_r2:.2f}</strong></div>
                 </div>
             """, unsafe_allow_html=True)
 
