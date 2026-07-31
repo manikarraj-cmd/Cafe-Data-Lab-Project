@@ -1,67 +1,104 @@
-☕ Cafe Operations & AI Dashboard
+# ☕ Cafe Data Lab — Executive Analytics & Revenue Prediction Engine
 
-An end-to-end Data Science, Data Engineering, and Machine Learning project that transforms raw restaurant orders into an interactive analytics dashboard and a predictive AI model.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Model-Random_Forest-orange?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-red?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Plotly](https://img.shields.io/badge/Visualization-Plotly-purple?logo=plotly&logoColor=white)](https://plotly.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-📸 Dashboard Preview
-<img width="1823" height="857" alt="Screenshot 2026-07-30 180117" src="https://github.com/user-attachments/assets/5f87657e-9ad4-41e1-be0f-817b149bd8f2" />
+An end-to-end, production-ready machine learning framework and executive decision dashboard designed to forecast restaurant transaction revenue and analyze regional branch operations in real time.
 
+---
 
+## 📌 Executive Summary & Business Value
 
+In retail food and beverage operations, optimizing basket size and anticipating order revenue across regional locations is critical for inventory forecasting, staffing, and dynamic cross-selling.
 
+This framework leverages historical transactional logs across regional branches (London, Madrid, Lisbon, Berlin, Paris) to fit an ensemble **Random Forest Regressor**, enabling operational teams and store managers to predict transaction monetary values based on early checkout parameters.
 
-(Hey! When you are on GitHub, edit this file and literally drag-and-drop a screenshot of your beautiful Streamlit app right here! Delete this text once you do.)
+### 🎯 Key Strategic Use Cases
+* **Real-time Order Value Forecasting:** Input order parameters (unit price, item volume, fulfillment type, branch city) to estimate total revenue before settlement.
+* **Smart Upselling & Loyalty Tiering:** Automatically trigger VIP loyalty enrollment or targeted promo suggestions based on predicted order tiers.
+* **Regional Operational Diagnostics:** Track gross revenue, unit sales volume, payment channel breakdown, and top-performing menu products across all active branches.
 
-🌟 Project Highlights
+---
 
-Data Engineering Pipeline: Automated Python scripts to ingest, clean, and migrate raw CSV data into a relational SQLite database.
+## 🏗️ System Architecture & Data Pipeline
 
-Business Analytics: Advanced SQL queries and Pandas aggregations to uncover top products, busy cities, and payment trends.
-
-Machine Learning: A Logistic Regression model (with Feature Engineering) that predicts a customer's payment method with 88% accuracy.
-
-Interactive Dashboard: A premium web application built with Streamlit and Plotly for real-time data exploration and AI predictions.
-
-🛠️ Technologies Used
-
-Language: Python 3
-
-Data Engineering: SQLite3, Pandas
-
-Machine Learning: Scikit-Learn (Logistic Regression, One-Hot Encoding)
-
-Visualization & UI: Streamlit, Plotly Express, Matplotlib
-
-🚀 How to Run this Project Locally
-
-1. Clone the repository and install dependencies:
-
-pip install pandas matplotlib scikit-learn streamlit plotly
-
-
-2. Setup the Database:
-Run the setup script to ingest the raw data and create the local SQLite database.
-
-python database_setup.py
-
-
-3. Launch the Web Dashboard:
-Start the Streamlit server to view the interactive dashboard.
-
-python -m streamlit run app.py
-
-
-🧠 Machine Learning Insights
-
-The AI model was trained to predict whether a customer will pay with Cash or a Credit Card.
-
-Feature Engineering: Extracted days of the week from raw dates to create an Is_Weekend indicator, significantly boosting model performance.
-
-Data Cleaning: Scrubbed trailing/leading spaces from raw text data to prevent classification errors.
-
-Performance: Achieved an overall accuracy of 88%, with a 1.00 Precision score for Cash transactions.
+┌─────────────────────────────────┐
+│ Raw Transaction Receipts        │ (Order ID, Product, Price, Quantity, City, Payment)
+└────────────────┬────────────────┘
+│
+▼
+┌─────────────────────────────────┐
+│ Data Preprocessing & Cleaning   │ String stripping, handling missing values, Total_Sales computation
+└────────────────┬────────────────┘
+│
+▼
+┌─────────────────────────────────┐
+│ One-Hot Feature Encoding        │ Categorical vectorization (Purchase Type, Payment Method, Branch City)
+└────────────────┬────────────────┘
+│
+▼
+┌─────────────────────────────────┐
+│ Random Forest Regression Engine │ Ensemble model fitting & cross-validated R² evaluation
+└────────────────┬────────────────┘
+│
+▼
+┌─────────────────────────────────┐
+│ Executive Streamlit Interface   │ Real-time decision analytics dashboard & scenario simulator
+└─────────────────────────────────┘
 
 
+---
 
+## 📊 Feature Matrix & Model Architecture
 
+Raw order logs are transformed into model-ready features capturing operational and monetary attributes:
 
+| Feature Dimension | Variable Name | Type | Business Rationale |
+| :--- | :--- | :--- | :--- |
+| **Unit Economics** | `Price` | Numerical | Baseline price threshold per menu item. |
+| **Basket Volume** | `Quantity` | Numerical | Unit count ordered per transaction batch. |
+| **Fulfillment Mode** | `Purchase Type` | Categorical | Channel dynamics (Dine-In vs. Takeaway). |
+| **Payment Channel** | `Payment Method` | Categorical | Payment settlement preference (Credit Card, Cash, Digital Wallet). |
+| **Geographic Location**| `City` | Categorical | Branch performance metrics across European regional markets. |
+| **Target Variable** | `Total_Sales` | Numerical | Computed total transaction monetary value (`Price` × `Quantity`). |
 
+### 🧠 Model Performance & Hyperparameters
+* **Primary Model:** Random Forest Regressor (`n_estimators=150`, `random_state=42`)
+* **Validation Strategy:** Holdout Train-Test Split (80/20 ratio)
+* **Model Evaluation Metric:** Coefficient of Determination ($R^2$ Score)
+
+---
+
+## 💻 Dashboard Capabilities
+
+The Streamlit executive control center provides three distinct functional views:
+
+### 1. 📊 Executive Performance Overview
+* **KPI Metrics:** Real-time metrics for Gross Revenue, Total Order Volume, Average Order Value (AOV), and Total Units Sold.
+* **Branch Revenue Breakdown:** Horizontal bar charts displaying revenue contribution by city.
+* **Payment Settlement Distribution:** Interactive donut chart analyzing transaction channel split.
+* **Menu Product Performance:** Volume and revenue breakdown for top-selling items.
+
+### 2. 🔮 AI Revenue Scenario Simulator
+Interactive scenario tool where branch managers adjust order parameters via UI sliders to generate instant AI revenue forecasts accompanied by automated strategic business recommendations.
+
+### 3. 📜 Transaction Logs Explorer
+Tabular data browser providing real-time data inspection and filtering capabilities.
+
+---
+
+## 🚀 Quick Start & Local Deployment
+
+### Prerequisites
+* Python 3.10+
+* Git
+
+### Installation & Execution Steps
+
+1. **Clone Repository:**
+   ```bash
+   git clone [https://github.com/manikarraj-cmd/cafe-data-lab-project.git](https://github.com/manikarraj-cmd/cafe-data-lab-project.git)
+   cd cafe-data-lab-project
