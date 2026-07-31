@@ -10,102 +10,107 @@ from sklearn.metrics import r2_score
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
-    page_title="Cafe Data Lab | Executive Decision Engine",
+    page_title="Cafe Data Lab ☕ | Executive Intelligence Engine",
     page_icon="☕",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# --- ENTERPRISE CUSTOM CSS STYLING ---
+# --- ENTERPRISE UI STYLING & EMOJI BADGES ---
 st.markdown("""
     <style>
-    /* Global Background & Typography */
+    /* Global Styles */
     .stApp {
-        background-color: #0b0f19;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #f1f5f9;
+        background-color: #0d1117;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #e6edf3;
     }
     
-    /* Sidebar Styling */
+    /* Sidebar Redesign */
     [data-testid="stSidebar"] {
-        background-color: #020617 !important;
-        border-right: 1px solid #1e293b;
+        background-color: #161b22 !important;
+        border-right: 1px solid #30363d;
     }
     
-    /* Headers & Text Customization */
-    h1, h2, h3, h4 {
-        color: #f8fafc !important;
-        font-weight: 700 !important;
-        letter-spacing: -0.02em !important;
-    }
-    p, span, label {
-        color: #94a3b8;
-    }
-    
-    /* Executive Metric Cards */
-    div[data-testid="stMetric"] {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 1px solid #334155;
+    /* Glassmorphism Card Containers */
+    .metric-card {
+        background: linear-gradient(135deg, rgba(22, 27, 34, 0.9) 0%, rgba(13, 17, 23, 0.8) 100%);
+        border: 1px solid #30363d;
         border-radius: 12px;
-        padding: 20px 24px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    div[data-testid="stMetric"]:hover {
-        border-color: #38bdf8;
+    .metric-card:hover {
+        border-color: #58a6ff;
         transform: translateY(-2px);
     }
-    div[data-testid="stMetricLabel"] label {
-        color: #94a3b8 !important;
-        font-size: 0.85rem !important;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 600;
-    }
-    div[data-testid="stMetricValue"] div {
-        color: #f8fafc !important;
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
-    }
     
-    /* Glassmorphism Containers */
-    .glass-card {
-        background: rgba(30, 41, 59, 0.7);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Top Header Banner */
+    .header-box {
+        background: linear-gradient(90deg, #1f6feb 0%, #388bfd 100%);
         border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 20px;
+        padding: 24px 30px;
+        margin-bottom: 25px;
+        color: #ffffff;
+        box-shadow: 0 10px 20px rgba(31, 111, 235, 0.2);
     }
     
-    /* Custom Primary Action Button */
-    .stButton > button {
-        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    /* Metric Typography */
+    .metric-title {
+        font-size: 0.85rem;
+        color: #8b949e;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+    .metric-value {
+        font-size: 1.9rem;
+        color: #f0f6fc;
+        font-weight: 800;
+    }
+    
+    /* Custom Streamlit Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 12px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        white-space: pre-wrap;
+        background-color: #161b22;
+        border-radius: 8px 8px 0 0;
+        border: 1px solid #30363d;
+        color: #8b949e;
+        font-weight: 600;
+        padding: 10px 20px;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #1f6feb !important;
         color: #ffffff !important;
-        font-weight: 600 !important;
+        border-color: #58a6ff !important;
+    }
+    
+    /* Custom Buttons */
+    .stButton > button {
+        background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
         border-radius: 8px !important;
         border: none !important;
-        padding: 12px 24px !important;
-        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+        padding: 14px 28px !important;
+        box-shadow: 0 4px 14px rgba(46, 160, 67, 0.4) !important;
         transition: all 0.2s ease !important;
     }
     .stButton > button:hover {
-        background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
-        box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5) !important;
-        transform: translateY(-1px);
-    }
-    
-    /* Streamlit Input Styling Override */
-    div[data-baseweb="select"] > div {
-        background-color: #0f172a !important;
-        border-color: #334155 !important;
-        color: #f8fafc !important;
-        border-radius: 8px !important;
+        background: linear-gradient(135deg, #2ea043 0%, #3fb950 100%) !important;
+        transform: translateY(-2px);
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- DATA LOADING & PREPROCESSING ---
+# --- DATA LOADING ---
 @st.cache_data
 def load_data():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -119,7 +124,6 @@ def load_data():
     if "City" in df.columns:
         df["City"] = df["City"].astype(str).str.strip()
     
-    # Calculate Total Sales
     if "Price" in df.columns and "Quantity" in df.columns:
         df["Total_Sales"] = df["Price"] * df["Quantity"]
     else:
@@ -129,7 +133,7 @@ def load_data():
 
 df = load_data()
 
-# --- ML MODEL TRAINING ---
+# --- MODEL TRAINING ---
 @st.cache_resource
 def train_revenue_model(data):
     features = ["Price", "Quantity", "Purchase Type", "Payment Method", "City"]
@@ -151,21 +155,24 @@ def train_revenue_model(data):
 
 model, feature_columns, model_r2 = train_revenue_model(df)
 
-# --- HEADER SECTION ---
-st.title("☕ Cafe Data Lab — Executive Decision Engine")
-st.markdown("<p style='font-size: 1.05rem; color: #94a3b8;'>Real-time sales performance diagnostics and machine learning transaction forecasting.</p>", unsafe_allow_html=True)
-st.markdown("---")
+# --- HEADER HERO BANNER ---
+st.markdown("""
+    <div class="header-box">
+        <h1 style="margin: 0; font-size: 2.2rem; font-weight: 800; color: white;">☕ Cafe Data Lab — Executive Command Center</h1>
+        <p style="margin: 5px 0 0 0; font-size: 1.05rem; opacity: 0.9;">Real-time Business Intelligence, Multi-Branch Analytics & AI Revenue Forecasting</p>
+    </div>
+""", unsafe_allow_html=True)
 
 # --- NAVIGATION TABS ---
-tab1, tab2 = st.tabs(["📊 Executive Overview", "🔮 Predictive Revenue Engine"])
+tab1, tab2, tab3 = st.tabs(["📊 Performance Dashboard", "🔮 Revenue Prediction Engine", "📜 Transactional Data Explorer"])
 
 # --- TAB 1: EXECUTIVE ANALYTICS ---
 with tab1:
-    st.sidebar.markdown("### 🎛️ Dashboard Filters")
+    st.sidebar.markdown("### 🎛️ Regional Filters")
     
     available_cities = sorted(df["City"].unique().tolist()) if "City" in df.columns else []
     selected_cities = st.sidebar.multiselect(
-        "Select Regional Branches:",
+        "📍 Select Branches:",
         options=available_cities,
         default=available_cities
     )
@@ -176,25 +183,49 @@ with tab1:
 
     filtered_df = df[df["City"].isin(selected_cities)]
 
-    # Top-Level KPI Summary
+    # KPI Metrics Banner
     total_revenue = filtered_df["Total_Sales"].sum()
     total_orders = len(filtered_df)
     avg_order_val = filtered_df["Total_Sales"].mean() if total_orders > 0 else 0
-    active_cities = filtered_df["City"].nunique()
+    total_items = filtered_df["Quantity"].sum() if "Quantity" in filtered_df.columns else 0
 
     k1, k2, k3, k4 = st.columns(4)
-    k1.metric("Gross Revenue", f"${total_revenue:,.2f}")
-    k2.metric("Total Order Volume", f"{total_orders:,}")
-    k3.metric("Average Basket Value", f"${avg_order_val:,.2f}")
-    k4.metric("Active Regions", f"{active_cities}")
+    
+    k1.markdown(f"""
+        <div class="metric-card">
+            <div class="metric-title">💰 Gross Revenue</div>
+            <div class="metric-value">${total_revenue:,.2f}</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    k2.markdown(f"""
+        <div class="metric-card">
+            <div class="metric-title">🧾 Total Orders</div>
+            <div class="metric-value">{total_orders:,}</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    k3.markdown(f"""
+        <div class="metric-card">
+            <div class="metric-title">📈 Avg Order Value</div>
+            <div class="metric-value">${avg_order_val:,.2f}</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    k4.markdown(f"""
+        <div class="metric-card">
+            <div class="metric-title">📦 Total Units Sold</div>
+            <div class="metric-value">{total_items:,}</div>
+        </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Visualization Grid
+    # Charts Grid
     row1_col1, row1_col2 = st.columns(2)
 
     with row1_col1:
-        st.markdown("#### Revenue Generation by Regional Branch")
+        st.markdown("### 🌆 Revenue Generation by City Branch")
         city_sales = filtered_df.groupby("City")["Total_Sales"].sum().reset_index().sort_values("Total_Sales", ascending=True)
         
         fig_city = px.bar(
@@ -203,21 +234,15 @@ with tab1:
             y="City",
             orientation="h",
             color="Total_Sales",
-            color_continuous_scale=["#0284c7", "#38bdf8", "#7dd3fc"],
+            color_continuous_scale=px.colors.sequential.Darkmint,
             template="plotly_dark",
-            labels={"Total_Sales": "Revenue ($)", "City": "Region"}
+            labels={"Total_Sales": "Revenue ($)", "City": "Branch Location"}
         )
-        fig_city.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)",
-            height=350,
-            margin=dict(l=10, r=10, t=20, b=10),
-            coloraxis_showscale=False
-        )
+        fig_city.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350, coloraxis_showscale=False)
         st.plotly_chart(fig_city, use_container_width=True)
 
     with row1_col2:
-        st.markdown("#### Payment Settlement Distribution")
+        st.markdown("### 💳 Payment Settlement Methods")
         if "Payment Method" in filtered_df.columns:
             payment_counts = filtered_df["Payment Method"].value_counts().reset_index()
             payment_counts.columns = ["Method", "Count"]
@@ -226,23 +251,17 @@ with tab1:
                 payment_counts,
                 names="Method",
                 values="Count",
-                hole=0.5,
-                color_discrete_sequence=["#38bdf8", "#818cf8", "#c084fc", "#f472b6"],
+                hole=0.45,
+                color_discrete_sequence=px.colors.qualitative.Pastel1,
                 template="plotly_dark"
             )
-            fig_pay.update_layout(
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                height=350,
-                margin=dict(l=10, r=10, t=20, b=10),
-                legend=dict(orientation="h", y=-0.1, x=0.2)
-            )
+            fig_pay.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350)
             st.plotly_chart(fig_pay, use_container_width=True)
 
     row2_col1, row2_col2 = st.columns(2)
 
     with row2_col1:
-        st.markdown("#### Top Revenue Generating Items")
+        st.markdown("### 🍔 Best-Selling Menu Items")
         if "Product" in filtered_df.columns:
             top_products = filtered_df.groupby("Product")["Total_Sales"].sum().reset_index().sort_values("Total_Sales", ascending=False).head(6)
             
@@ -251,21 +270,15 @@ with tab1:
                 x="Product",
                 y="Total_Sales",
                 color="Total_Sales",
-                color_continuous_scale=["#34d399", "#059669"],
+                color_continuous_scale=px.colors.sequential.Electric,
                 template="plotly_dark",
-                labels={"Total_Sales": "Revenue ($)", "Product": "Menu Item"}
+                labels={"Total_Sales": "Revenue ($)", "Product": "Menu Product"}
             )
-            fig_prod.update_layout(
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                height=350,
-                margin=dict(l=10, r=10, t=20, b=10),
-                coloraxis_showscale=False
-            )
+            fig_prod.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350, coloraxis_showscale=False)
             st.plotly_chart(fig_prod, use_container_width=True)
 
     with row2_col2:
-        st.markdown("#### Order Type Mix (Dine-In vs. Takeaway)")
+        st.markdown("### 🪑 Order Type Mix (Dine-In vs Takeaway)")
         if "Purchase Type" in filtered_df.columns:
             type_counts = filtered_df["Purchase Type"].value_counts().reset_index()
             type_counts.columns = ["Type", "Count"]
@@ -274,41 +287,35 @@ with tab1:
                 type_counts,
                 names="Type",
                 values="Count",
-                hole=0.5,
-                color_discrete_sequence=["#fbbf24", "#f59e0b"],
+                hole=0.45,
+                color_discrete_sequence=["#f78166", "#58a6ff"],
                 template="plotly_dark"
             )
-            fig_type.update_layout(
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                height=350,
-                margin=dict(l=10, r=10, t=20, b=10),
-                legend=dict(orientation="h", y=-0.1, x=0.3)
-            )
+            fig_type.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350)
             st.plotly_chart(fig_type, use_container_width=True)
 
 # --- TAB 2: PREDICTIVE ENGINE ---
 with tab2:
-    st.markdown("### 🔮 Machine Learning Scenario Simulator")
-    st.markdown("Adjust hypothetical transaction variables to forecast real-time customer monetary spend using an ensemble Random Forest model.")
+    st.markdown("## 🔮 Machine Learning Scenario Simulator")
+    st.markdown("Simulate order combinations below to forecast transaction revenue using a Random Forest model.")
     st.markdown("<br>", unsafe_allow_html=True)
 
     sim_col1, sim_col2 = st.columns([1, 1], gap="large")
 
     with sim_col1:
-        st.markdown("#### ⚙️ Order Scenario Inputs")
+        st.markdown("### ⚙️ Simulation Parameters")
         
-        input_price = st.slider("Item Unit Price ($)", float(df["Price"].min()), float(df["Price"].max()), float(df["Price"].median()))
-        input_quantity = st.slider("Order Quantity Units", int(df["Quantity"].min()), int(df["Quantity"].max()), 3)
-        input_city = st.selectbox("Target Regional Branch", df["City"].unique().tolist())
-        input_type = st.selectbox("Fulfillment Channel", df["Purchase Type"].unique().tolist() if "Purchase Type" in df.columns else ["Dine-In"])
-        input_payment = st.selectbox("Preferred Payment Method", df["Payment Method"].unique().tolist() if "Payment Method" in df.columns else ["Credit Card"])
+        input_price = st.slider("💵 Unit Price ($)", float(df["Price"].min()), float(df["Price"].max()), float(df["Price"].median()))
+        input_quantity = st.slider("📦 Order Quantity", int(df["Quantity"].min()), int(df["Quantity"].max()), 3)
+        input_city = st.selectbox("📍 Target Branch", df["City"].unique().tolist())
+        input_type = st.selectbox("🍽️ Fulfillment Channel", df["Purchase Type"].unique().tolist() if "Purchase Type" in df.columns else ["Dine-In"])
+        input_payment = st.selectbox("💳 Payment Channel", df["Payment Method"].unique().tolist() if "Payment Method" in df.columns else ["Credit Card"])
 
         st.markdown("<br>", unsafe_allow_html=True)
-        predict_btn = st.button("⚡ Run Revenue Simulation", use_container_width=True)
+        predict_btn = st.button("🚀 Forecast Transaction Value", use_container_width=True)
 
     with sim_col2:
-        st.markdown("#### 🎯 Model Forecast & Analytics")
+        st.markdown("### 🎯 Predicted Outcome & Insights")
         
         if predict_btn:
             input_df = pd.DataFrame([{
@@ -324,27 +331,32 @@ with tab2:
 
             prediction = model.predict(input_encoded)[0]
 
-            st.metric("Forecasted Order Revenue", f"${prediction:,.2f}")
-            
             st.markdown(f"""
-                <div style='background-color: #0f172a; border-left: 4px solid #38bdf8; padding: 16px; border-radius: 8px; margin-top: 15px;'>
-                    <p style='margin:0; color: #f8fafc; font-weight: 600;'>Model Performance Signal</p>
-                    <p style='margin:0; color: #94a3b8; font-size: 0.9rem;'>Cross-Validated Model $R^2$ Score: <strong style='color: #38bdf8;'>{model_r2:.2f}</strong></p>
+                <div style="background: #161b22; border: 2px solid #238636; border-radius: 12px; padding: 25px; text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 1rem; color: #8b949e; text-transform: uppercase; font-weight: 700;">Forecasted Order Value</div>
+                    <div style="font-size: 3rem; color: #3fb950; font-weight: 800; margin: 10px 0;">${prediction:,.2f}</div>
+                    <div style="font-size: 0.9rem; color: #8b949e;">⚡ AI Model Confidence ($R^2$ Score): <strong style="color: #58a6ff;">{model_r2:.2f}</strong></div>
                 </div>
             """, unsafe_allow_html=True)
 
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("##### Strategic Operational Prescription:")
+            st.markdown("#### 💡 Strategic Business Prescription:")
             
             if prediction > 80:
-                st.success("🌟 **High-Tier Order Cohort:** Automatically qualify customer for premium loyalty program status and complementary upsell offers.")
+                st.success("🌟 **High-Value Order Tier:** Automatically enroll customer in VIP loyalty perk status and present high-margin dessert add-ons!")
             elif prediction > 40:
-                st.info("⚡ **Standard Order Cohort:** High potential for cross-selling complementary beverage/dessert items at checkout.")
+                st.info("⚡ **Standard Order Tier:** Strong opportunity to suggest combo deals or drink upgrades at point-of-sale.")
             else:
-                st.warning("🔹 **Value-Seeking Order Cohort:** Suggest targeted bundle promotions to drive higher basket volume.")
+                st.warning("🔹 **Value Order Tier:** Recommend automated digital promotional vouchers for their next visit.")
         else:
-            st.info("👈 Adjust the scenario parameters on the left and click **'Run Revenue Simulation'** to generate predictions.")
+            st.info("👈 Set your scenario parameters on the left and click **'Forecast Transaction Value'** to view AI predictions.")
+
+# --- TAB 3: DATA EXPLORER ---
+with tab3:
+    st.markdown("## 📜 Transaction Logs Explorer")
+    st.markdown("Filter, inspect, and export underlying order dataset records.")
+    
+    st.dataframe(filtered_df if 'filtered_df' in locals() else df, use_container_width=True, height=450)
 
 # --- FOOTER ---
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: #64748b; font-size: 0.85rem;'>Enterprise Dashboard Engine • Developed by Manikar Raj</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #8b949e; font-size: 0.85rem;'>Enterprise Intelligence Platform • Built by Manikar Raj</p>", unsafe_allow_html=True)
