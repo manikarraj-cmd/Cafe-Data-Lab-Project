@@ -10,20 +10,20 @@ An end-to-end, production-ready machine learning framework and executive decisio
 
 ---
 
-## 📌 Executive Summary & Business Value
+##  Executive Summary & Business Value
 
 In retail food and beverage operations, optimizing basket size and anticipating order revenue across regional locations is critical for inventory forecasting, staffing, and dynamic cross-selling.
 
 This framework leverages historical transactional logs across regional branches (London, Madrid, Lisbon, Berlin, Paris) to fit an ensemble **Random Forest Regressor**, enabling operational teams and store managers to predict transaction monetary values based on early checkout parameters.
 
-### 🎯 Key Strategic Use Cases
+### Key Strategic Use Cases
 * **Real-time Order Value Forecasting:** Input order parameters (unit price, item volume, fulfillment type, branch city) to estimate total revenue before settlement.
 * **Smart Upselling & Loyalty Tiering:** Automatically trigger VIP loyalty enrollment or targeted promo suggestions based on predicted order tiers.
 * **Regional Operational Diagnostics:** Track gross revenue, unit sales volume, payment channel breakdown, and top-performing menu products across all active branches.
 
 ---
 
-## 🏗️ System Architecture & Data Pipeline
+##  System Architecture & Data Pipeline
 
 ┌─────────────────────────────────┐
 │ Raw Transaction Receipts        │ (Order ID, Product, Price, Quantity, City, Payment)
@@ -52,7 +52,7 @@ This framework leverages historical transactional logs across regional branches 
 
 ---
 
-## 📊 Feature Matrix & Model Architecture
+## Feature Matrix & Model Architecture
 
 Raw order logs are transformed into model-ready features capturing operational and monetary attributes:
 
@@ -65,32 +65,32 @@ Raw order logs are transformed into model-ready features capturing operational a
 | **Geographic Location**| `City` | Categorical | Branch performance metrics across European regional markets. |
 | **Target Variable** | `Total_Sales` | Numerical | Computed total transaction monetary value (`Price` × `Quantity`). |
 
-### 🧠 Model Performance & Hyperparameters
+###  Model Performance & Hyperparameters
 * **Primary Model:** Random Forest Regressor (`n_estimators=150`, `random_state=42`)
 * **Validation Strategy:** Holdout Train-Test Split (80/20 ratio)
 * **Model Evaluation Metric:** Coefficient of Determination ($R^2$ Score)
 
 ---
 
-## 💻 Dashboard Capabilities
+##  Dashboard Capabilities
 
 The Streamlit executive control center provides three distinct functional views:
 
-### 1. 📊 Executive Performance Overview
+### 1.  Executive Performance Overview
 * **KPI Metrics:** Real-time metrics for Gross Revenue, Total Order Volume, Average Order Value (AOV), and Total Units Sold.
 * **Branch Revenue Breakdown:** Horizontal bar charts displaying revenue contribution by city.
 * **Payment Settlement Distribution:** Interactive donut chart analyzing transaction channel split.
 * **Menu Product Performance:** Volume and revenue breakdown for top-selling items.
 
-### 2. 🔮 AI Revenue Scenario Simulator
+### 2.  AI Revenue Scenario Simulator
 Interactive scenario tool where branch managers adjust order parameters via UI sliders to generate instant AI revenue forecasts accompanied by automated strategic business recommendations.
 
-### 3. 📜 Transaction Logs Explorer
+### 3. Transaction Logs Explorer
 Tabular data browser providing real-time data inspection and filtering capabilities.
 
 ---
 
-## 🚀 Quick Start & Local Deployment
+## Quick Start & Local Deployment
 
 ### Prerequisites
 * Python 3.10+
